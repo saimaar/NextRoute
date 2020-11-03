@@ -1,21 +1,17 @@
-<h1 align="center">Travel Advisor 🛫</h1>
+<h1 align="center">Next Route 🛫</h1>
 
 <h4 align="center">A `React and Rails` App designed as a rating traveling app that offers a large selection of destinations throughout the world.</h4>
 
-<p align="center">
-  <img max-height: 90% width="100%" src="src/images/tone.gif" alt="gif of the app">
-</p>
-  
-***➡️ Link to [Demo](https://youtu.be/t04bmG8gYdw)***<br/>
-***➡️ Link to [Live website](https://traveladvisor-app.herokuapp.com/)***<br/>
+
+
 
 
 ## Features
-- Users can sign up or sign in. 
-- Upon Sign in Users are taken to the Home page and gain access to their Profile 
+- Users can sign up or sign in.
+- Upon Sign in Users are taken to the Home page and gain access to their Profile
 - User is able to see a list of destinations, search for a specific destination
 - Users can add Destinations to their bucketlist
-- Users can Review Destinations 
+- Users can Review Destinations
 - User can also see their amount of contributions to the website(reviews), the number of destinations in their bucketlist
 - Users can Delete, Bucketlist Items, Reviews and their Profile
 
@@ -24,7 +20,7 @@
 
 ***Link to [Back End Repository](https://github.com/saimaar/Travel-Advisor-Backend)***<br />
 
-**Front End:** 
+**Front End:**
 - React [16.12.0]
 - React Router [^5.1.2] - Declarative Routing
 - React Router Dom [^5.1.2] - Declarative Routing
@@ -49,7 +45,7 @@ Before you begin, ensure you have installed the latest version of:
 - PostgreSQL
 - React
 
-## Installation 
+## Installation
 
 To launch the app you'll have to follow the following steps:
 
