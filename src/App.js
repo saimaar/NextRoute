@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter} from 'react-router-dom'
 import './App.css';
-import { Route, Switch } from 'react-router'
+import { Route, Switch, useHistory } from 'react-router'
 import HomeContainer from './HomeComponents/HomeContainer'
 import ProfileContainer from './ProfileComponents/ProfileContainer'
 import ShowContainer from './DestinationComponents/ShowContainer'
@@ -14,7 +14,10 @@ function App () {
     let [destinations, setDestinations] = useState([])
     let [user, setUser] = useState({})
     let [searchTerm, setSearchTerm] = useState("")
-
+    let [token, setToken] = useState("")
+    let [error, setError] = useState("")
+    const history = useHistory()
+console.log(history);
     useEffect(() =>{
       fetch(`https://traveladvisor-api.herokuapp.com/destinations`)
       .then(resp => resp.json())
@@ -79,41 +82,43 @@ console.log(user);
   //     }
   // }
 
-  // createNewUser = (newUser) => {
-  //   this.setState({
-  //     user: newUser.user,
-  //     token: newUser.token
-  //   })
-  // }
-  //
-  // loginUser = (user) => {
-  //   fetch('https://traveladvisor-api.herokuapp.com/login', {
-  //     method: "POST",
-  //     headers: {
-  //       "content-type": "application/json"
-  //     },
-  //     body: JSON.stringify(user)
-  //   })
-  //   .then(r => r.json())
-  //   .then(userData => {
-  //     if(userData.error){
-  //       this.setState({
-  //         error: userData.error
-  //       })
-  //     }else{
-  //       localStorage.setItem("token", userData.token)
-  //       this.setState({
-  //         user: userData.user,
-  //         search: ""
-  //       })
-  //     }
-  //   })
-  //
-  //
-  //
-  //
-  // }
-  //
+  let createNewUser = (newUser) => {
+    this.setState({
+      user: newUser.user,
+      token: newUser.token
+    })
+    setUser(newUser.user)
+    setToken(newUser.token)
+  }
+
+  let loginUser = (username, password) => {
+    fetch('https://traveladvisor-api.herokuapp.com/login', {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        username,
+        password
+      })
+    })
+    .then(r => r.json())
+    .then(userData => {
+      console.log(userData);
+      if(userData.error){
+        setError(userData.error)
+      }else{
+        localStorage.setItem("token", userData.token)
+        setUser(userData.user)
+        setSearchTerm("")
+      }
+    })
+
+
+
+
+  }
+
   let updateSearchForm = (newValue) => {
     setSearchTerm((prevState) =>{ return newValue})
   }
@@ -129,14 +134,12 @@ console.log(user);
   let clearSearch = (emptyValue) => {
     setSearchTerm(emptyValue)
   }
-  //
-  //
-  //    console.log(this.state.user);
+
   //   let destinationsId = this.state.destinations.map(destination => destination.id)
   //
     return (
       <div className="page-window">
-        <HeaderContainer />
+        <HeaderContainer error={error} createNewUser={createNewUser} loginUser={loginUser} history={history}/>
        <hr className="header-separation"/>
 
      <Switch>
@@ -148,7 +151,7 @@ console.log(user);
        user={user}
 
        />} />
-
+       <Route exact path='/profile' render={localStorage.token ? (routerProps) => <ProfileContainer routerProps={routerProps} /> : (routerProps) => <NotFound />}/>
        <Route path='/:id' render={ (routerProps) => <ShowContainer user={user} routerProps={routerProps}/> }/>
 
      </Switch>

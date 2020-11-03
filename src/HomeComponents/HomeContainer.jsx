@@ -13,7 +13,7 @@ function HomeContainer(props) {
           searchTerm={props.searchTerm}
           updateSearchForm={props.updateSearchForm}
         />
-          <AuthContainer  />
+      <AuthContainer user={props.user}  />
         <div className="auth-destination-container">
           <DestinationContainer clearSearch={props.clearSearch}  destinations={props.destinations} />
         </div>

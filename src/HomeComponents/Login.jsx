@@ -1,38 +1,28 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { Form, Button, Modal } from 'semantic-ui-react'
 
-class Login extends Component {
-    state={
-        username: "",
-        password: ""
-    }
+function Login (props) {
 
-    handleAllChange = (evt) => {
-        let {name, value} = evt.target
+  let [username, setUsername] = useState("")
+  let [password, setPassword] = useState("")
 
-        this.setState({
-            [name]: value
-        })
-    }
 
-    handleSubmit = (evt) => {
+
+    let handleSubmit = (evt) => {
         evt.preventDefault()
-        this.props.loginUser(this.state)
-        this.props.history.push("/")
+        props.loginUser(username,password)
+        props.history.push("/")
+        setUsername("")
+        setPassword("")
+      }
 
-        this.setState({
-            username: "",
-            password: ""
-        })
-    }
 
-    render() {
-        
+
         return (
             <div>
             <Modal.Header className="sign-up-login-form-header">Log in</Modal.Header>
             <Modal.Description>
-                <Form className="sign-up-login-form" onSubmit={this.handleSubmit}>
+                <Form className="sign-up-login-form" onSubmit={handleSubmit}>
                     <Form.Field>
                         <label className="sign-up-login-label">Username</label>
                         <Form.Input
@@ -42,28 +32,28 @@ class Login extends Component {
                             type="username"
                             placeholder="Username"
                             name="username"
-                            value={this.state.username}
-                            onChange={this.handleAllChange}
+                            value={username}
+                            onChange={e => {setUsername(e.target.value)}}
                         />
                         <label className="sign-up-login-label">Password</label>
-                        <Form.Input 
+                        <Form.Input
                             icon='lock'
                             iconPosition='left'
                             className="sign-up-login-input"
                             type="password"
                             placeholder="Password"
                             name="password"
-                            value={this.state.password}
-                            onChange={this.handleAllChange}
+                            value={password}
+                            onChange={e => {setPassword(e.target.value)}}
                         />
                     </Form.Field>
-                    <p className="invalid-logins">{this.props.error}</p>
+                    <p className="invalid-logins">{props.error}</p>
                     <Form.Field className="sign-up-login-submit-btn" color="black" control={Button}>Log in</Form.Field>
                     </Form>
             </Modal.Description>
             </div>
         )
     }
-}
+
 
 export default Login;

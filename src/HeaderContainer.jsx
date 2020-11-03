@@ -4,7 +4,7 @@ import { Header, Button, Image, Modal } from 'semantic-ui-react'
 import SignUp from './HomeComponents/SignUp'
 import Login from './HomeComponents/Login'
 
-function HeaderContainer(){
+function HeaderContainer(props){
 
   let logOutUser = () => {
 
@@ -32,10 +32,10 @@ function HeaderContainer(){
             </> :
             <>
             <Modal trigger={<Button className="sign-up-btn">Log in</Button>}>
-              <Login />
+              <Login loginUser={props.loginUser} history={props.history} error={props.error} />
             </Modal>
             <Modal trigger={<Button className="sign-up-btn">Sign up</Button>}>
-            <SignUp />
+            <SignUp history={props.history} createNewUser={props.createNewUser} />
           </Modal>
           <Link to="/" >
           <Button className="home-btn">Home</Button>

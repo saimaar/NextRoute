@@ -1,24 +1,14 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import { Form, Button, Modal } from 'semantic-ui-react'
 
-class SignUp extends Component {
+function SignUp(props) {
+ let [username, setUsername] = useState("")
+ let [bio, setBio] = useState("")
+ let [picture, setPicture] = useState("")
+ let [password, setPassword] = useState("")
+ let [error, setError] = useState("")
 
-  state = {
-    username: "",
-    bio:"",
-    picture:"",
-    password:"",
-    error: ""
-  }
-
-  handleAllChange=(evt)=>{
-    let {value, name} = evt.target
-    this.setState({
-      [name]: value
-    })
-  }
-
-  handleSubmit = (evt) => {
+  let  handleSubmit = (evt) => {
     evt.preventDefault()
     fetch('https://traveladvisor-api.herokuapp.com/users', {
       method: "POST",
@@ -26,31 +16,32 @@ class SignUp extends Component {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify({
+        username,
+        bio,
+        picture,
+        password
+      })
     })
     .then(r => r.json())
     .then(newUser => {
       if(newUser.error){
-        this.setState({
-          error: newUser.error
-        })
+       setError(newUser.error)
       }else{
         localStorage.setItem("token", newUser.token)
-        this.props.createNewUser(newUser)
-        this.props.history.push("/")
-        this.setState({
-          error: ""
-        })
+        props.createNewUser(newUser)
+         props.history.push("/")
+         setError("")
       }
     })
   }
 
-  render() {
+
     return (
       <div>
         <Modal.Header className="sign-up-login-form-header">Sign up</Modal.Header>
         <Modal.Description>
-          <Form className="sign-up-login-form" onSubmit={this.handleSubmit}>
+          <Form className="sign-up-login-form" onSubmit={handleSubmit}>
             <Form.Field>
               <label className="sign-up-login-label"><b>Username</b></label>
               <Form.Input
@@ -60,8 +51,8 @@ class SignUp extends Component {
                 type="username"
                 placeholder="Username"
                 name="username"
-                value={this.state.username}
-                onChange={this.handleAllChange}
+                value={username}
+                onChange={e => setUsername(e.target.value)}
               />
               <label className="sign-up-login-label"><b>Bio</b></label>
               <Form.Input
@@ -71,8 +62,8 @@ class SignUp extends Component {
                 type="bio"
                 placeholder="Enter bio"
                 name="bio"
-                value={this.state.bio}
-                onChange={this.handleAllChange}
+                value={bio}
+                onChange={e => setBio(e.target.value)}
               />
 
               <label className="sign-up-login-label"><b>Picture</b></label>
@@ -83,8 +74,8 @@ class SignUp extends Component {
                 type="picture"
                 placeholder="Picture"
                 name="picture"
-                value={this.state.picture}
-                onChange={this.handleAllChange}
+                value={picture}
+                onChange={e => setPicture(e.target.value)}
               />
 
               <label className="sign-up-login-label"><b>Password</b></label>
@@ -95,17 +86,16 @@ class SignUp extends Component {
                 type="password"
                 placeholder="Password"
                 name="password"
-                value={this.state.password}
-                onChange={this.handleAllChange}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
               />
             </Form.Field>
-            <p className="invalid-logins">{this.state.error}</p>
+            <p className="invalid-logins">{error}</p>
             <Form.Field className="sign-up-login-submit-btn" color="black" control={Button}>Sign up</Form.Field>
           </Form>
         </Modal.Description>
       </div>
     );
-  }
 }
 
 export default SignUp;
