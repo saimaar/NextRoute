@@ -15,7 +15,7 @@ function HomeContainer(props) {
         />
           <AuthContainer  />
         <div className="auth-destination-container">
-          <DestinationContainer destinations={props.destinations} />
+          <DestinationContainer clearSearch={props.clearSearch}  destinations={props.destinations} />
         </div>
       </div>
     );

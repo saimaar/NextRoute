@@ -3,23 +3,29 @@ import DestinationCard from './DestinationCard'
 import {Link} from 'react-router-dom'
 import { Card } from 'semantic-ui-react'
 
-class DestinationContainer extends Component {
+function DestinationContainer(props) {
 
-handleClick = () => {
-  this.props.clearSearch("")
-    // props.searchItems("")
+let handleClick = () => {
+  props.clearSearch("")
+  
 }
+console.log(props);
+  //
+  //   console.log(this.props);
 
-  render() {
-  let destinationCard = this.props.destinations.map(destination =>
-     <Link onClick={this.handleClick} key={destination.id} to={`/${destination.id}`}><DestinationCard key={destination.id} destination={destination} routerProps={this.props.routerProps}/></Link>)
+  //
+  let destinationCard = props.destinations !== undefined ?
+    props.destinations.map(destination =>
+     <Link onClick={handleClick} key={destination.id} to={`/${destination.id}`}>
+       <DestinationCard key={destination.id} destination={destination} routerProps={props.routerProps}/></Link>)
+         : null
 
     return (
       <Card.Group className={localStorage.token ? "login-destination-container" : "destination-container"}>
         {destinationCard}
       </Card.Group>
     );
-  }
+
 
 }
 

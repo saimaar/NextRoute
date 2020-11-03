@@ -146,7 +146,10 @@ console.log(user);
        updateSearchForm={updateSearchForm}
        searchTerm={searchTerm}
        user={user}
+
        />} />
+
+       <Route path='/:id' render={ (routerProps) => <ShowContainer user={user} routerProps={routerProps}/> }/>
 
      </Switch>
 

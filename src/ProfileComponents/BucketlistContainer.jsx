@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BucketlistCard from './BucketlistCard'
-import DestinationCard from '../HomeComponents/DestinationCard'
+// import DestinationCard from '../HomeComponents/DestinationCard'
 import {Link} from 'react-router-dom'
 import { Container, Header, Card } from 'semantic-ui-react'
 
