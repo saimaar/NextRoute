@@ -92,9 +92,10 @@ console.log(destination);
     let notifyAdd =  clicked ? <Label pointing ="right" className="notifyAdd" size ="teal" basic color='black' >
           Added to your bucketlist!
         </Label> : null
+
     return (
       <div>
-
+        {props.destinationsId.includes(parseInt(props.routerProps.match.params.id)) ?
           <div>
             <div className="buckNotify">
           {notifyAdd}
@@ -105,6 +106,9 @@ console.log(destination);
             <Card.Group className="things-to-do-container">{thingsToDo}</Card.Group>
             <CommentContainer routerProps={props.routerProps} deleteReview={deleteReview} createComment={createComment} destination={destination} user={props.user} />
           </div>
+          :
+          <div><NotFound/></div>
+        }
 
       </div>
     );

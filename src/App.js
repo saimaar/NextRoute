@@ -17,7 +17,7 @@ function App () {
     let [token, setToken] = useState("")
     let [error, setError] = useState("")
     const history = useHistory()
-console.log(history);
+// console.log(history);
 
 
     useEffect(() =>{
@@ -45,7 +45,7 @@ console.log(history);
 
 
     },[])
-console.log(user);
+// console.log(user);
 
   let createNewUser = (newUser) => {
     setUser(newUser.user)
@@ -96,8 +96,8 @@ console.log(user);
     setSearchTerm(emptyValue)
   }
 
-  //   let destinationsId = this.state.destinations.map(destination => destination.id)
-  //
+    let destinationsId = destinations.map(destination => destination.id)
+
     return (
       <div className="page-window">
         <HeaderContainer error={error} createNewUser={createNewUser} loginUser={loginUser} history={history}/>
@@ -112,8 +112,17 @@ console.log(user);
        user={user}
 
        />} />
-       <Route exact path='/profile' render={localStorage.token ? (routerProps) => <ProfileContainer history={history} routerProps={routerProps} /> : (routerProps) => <NotFound />}/>
-       <Route path='/:id' render={ (routerProps) => <ShowContainer user={user}  routerProps={routerProps}/> }/>
+       <Route exact path='/profile'
+          render={localStorage.token ? (routerProps) =>
+            <ProfileContainer
+              history={history}
+              routerProps={routerProps} />
+            : (routerProps) => <NotFound />}/>
+
+       <Route path='/:id'
+         render={ (routerProps) => <ShowContainer user={user}
+          destinationsId={destinationsId}
+          routerProps={routerProps}/> }/>
 
      </Switch>
 
