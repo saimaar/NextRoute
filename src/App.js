@@ -13,7 +13,7 @@ function App () {
 
     let [destinations, setDestinations] = useState([])
     let [user, setUser] = useState({})
-    console.log(destinations);
+    let [searchTerm, setSearchTerm] = useState("")
 
     useEffect(() =>{
       fetch(`https://traveladvisor-api.herokuapp.com/destinations`)
@@ -114,27 +114,21 @@ console.log(user);
   //
   // }
   //
-  // updateSearchForm = (newValue) => {
-  //   this.setState(prevState => {
-  //     return {
-  //       search: newValue
-  //     }
-  //   })
-  // }
-  //
-  // filterSearch = () => {
-  //   let newArr = this.state.destinations.filter( destination => {
-  //     let searchValue = this.state.search.toLowerCase()
-  //     return destination.name.toLowerCase().includes(searchValue) || destination.trip_type.toLowerCase().includes(searchValue)
-  //   })
-  //   return newArr
-  // }
-  //
-  // clearSearch = (emptyValue) => {
-  //   this.setState({
-  //     search: emptyValue
-  //   })
-  // }
+  let updateSearchForm = (newValue) => {
+    setSearchTerm((prevState) =>{ return newValue})
+  }
+
+  let filterSearch = () => {
+    let newArr = destinations.filter( destination => {
+      let searchValue = searchTerm.toLowerCase()
+      return destination.name.toLowerCase().includes(searchValue) || destination.trip_type.toLowerCase().includes(searchValue)
+    })
+    return newArr
+  }
+
+  let clearSearch = (emptyValue) => {
+    setSearchTerm(emptyValue)
+  }
   //
   //
   //    console.log(this.state.user);
@@ -147,8 +141,10 @@ console.log(user);
 
      <Switch>
        <Route exact path='/' render={ () => <HomeContainer
-
-       destinations={destinations}
+       clearSearch={clearSearch}
+       destinations={filterSearch()}
+       updateSearchForm={updateSearchForm}
+       searchTerm={searchTerm}
        user={user}
        />} />
 
