@@ -10,7 +10,7 @@ function SignUp(props) {
 
   let  handleSubmit = (evt) => {
     evt.preventDefault()
-    fetch('https://traveladvisor-api.herokuapp.com/users', {
+    fetch('http://localhost:3000/users', {
       method: "POST",
       headers:{
         "Content-Type": "application/json",

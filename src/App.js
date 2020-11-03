@@ -18,8 +18,10 @@ function App () {
     let [error, setError] = useState("")
     const history = useHistory()
 console.log(history);
+
+
     useEffect(() =>{
-      fetch(`https://traveladvisor-api.herokuapp.com/destinations`)
+      fetch(`http://localhost:3000/destinations`)
       .then(resp => resp.json())
       .then(destinations => {
         setDestinations(destinations)
@@ -27,7 +29,7 @@ console.log(history);
 
       if(localStorage.token){
          console.log(localStorage);
-         fetch(`https://traveladvisor-api.herokuapp.com/persist`, {
+         fetch(`http://localhost:3000/persist`, {
            headers: {
              "Authorization": `bearer ${localStorage.token}`
            }
@@ -45,54 +47,13 @@ console.log(history);
     },[])
 console.log(user);
 
-  //
-  // state={
-  //   user: {},
-  //   destinations:[],
-  //   search: "",
-  //   error: ""
-  // }
-
-  // componentDidMount() {
-  //   fetch(`https://traveladvisor-api.herokuapp.com/destinations`)
-  //   .then(r => r.json())
-  //   .then((destinations) => {
-  //     this.setState({
-  //       destinations
-  //     })
-  //   })
-  //
-  //   if(localStorage.token){
-  //     console.log(localStorage);
-  //     fetch(`https://traveladvisor-api.herokuapp.com/persist`, {
-  //       headers: {
-  //         "Authorization": `bearer ${localStorage.token}`
-  //       }
-  //     })
-  //     .then(r => r.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       if(data.token){
-  //
-  //         this.setState({
-  //             user: data.user
-  //           })
-  //         }
-  //       })
-  //     }
-  // }
-
   let createNewUser = (newUser) => {
-    this.setState({
-      user: newUser.user,
-      token: newUser.token
-    })
     setUser(newUser.user)
     setToken(newUser.token)
   }
 
   let loginUser = (username, password) => {
-    fetch('https://traveladvisor-api.herokuapp.com/login', {
+    fetch('http://localhost:3000/login', {
       method: "POST",
       headers: {
         "content-type": "application/json"
@@ -151,8 +112,8 @@ console.log(user);
        user={user}
 
        />} />
-       <Route exact path='/profile' render={localStorage.token ? (routerProps) => <ProfileContainer routerProps={routerProps} /> : (routerProps) => <NotFound />}/>
-       <Route path='/:id' render={ (routerProps) => <ShowContainer user={user} routerProps={routerProps}/> }/>
+       <Route exact path='/profile' render={localStorage.token ? (routerProps) => <ProfileContainer history={history} routerProps={routerProps} /> : (routerProps) => <NotFound />}/>
+       <Route path='/:id' render={ (routerProps) => <ShowContainer user={user}  routerProps={routerProps}/> }/>
 
      </Switch>
 

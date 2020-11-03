@@ -12,20 +12,16 @@ function ShowContainer(props) {
  let [destination, setDestination] = useState({})
  let [addJoiner, setAddJoiner] = useState([])
  let [reviews, setReviews] = useState([])
- console.log(clicked, destination );
-
 
  useEffect(()=>{
    let destination_id = parseInt(props.routerProps.match.params.id)
-   fetch(`https://traveladvisor-api.herokuapp.com/destinations/${destination_id}`)
+   fetch(`http://localhost:3000/destinations/${destination_id}`)
    .then(r => r.json())
    .then(destination => {
      setDestination(destination)
    })
 
  },[])
-
-
 
 
 let createComment = (newComment) => {
@@ -61,28 +57,35 @@ let createComment = (newComment) => {
     })
   }
 
+
+
   let addToBucketList = (notifyAdd) => {
-      fetch('https://traveladvisor-api.herokuapp.com/add_joiners', {
+    console.log(localStorage.token);
+      fetch(`http://localhost:3000/add_joiners`, {
         method: "POST",
+
         headers: {
           "content-type": "application/json",
           "Authorization": `bearer ${localStorage.token}`
         },
+
         body: JSON.stringify({
           destination_id: destination.id
         })
       })
       .then(r => r.json())
       .then(add_joiner => {
-          let newAddJoiner = [...destination.add_joiners, add_joiner]
-      
-
-        setAddJoiner(newAddJoiner)
+        console.log(add_joiner);
+        //   let newAddJoiner = [...destination.add_joiners, add_joiner]
+        //
+        //
+        setAddJoiner(add_joiner)
         setClicked((prevState) => !prevState)
       })
   }
 
-
+console.log(addJoiner);
+console.log(destination);
 
     let { things_to_dos } = destination
     let thingsToDo = !things_to_dos ? null : things_to_dos.map(thingstodo => <ThingsToDoContainer key={thingstodo.id} thingstodo={thingstodo}/>)

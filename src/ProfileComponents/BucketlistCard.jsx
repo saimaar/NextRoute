@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 class BucketlistCard extends Component {
 
     handleDelete = () => {
+      // console.log(this.props);
         this.props.deleteBucketItem(this.props.bucketlistItem.id)
     }
 

@@ -7,7 +7,8 @@ import Login from './HomeComponents/Login'
 function HeaderContainer(props){
 
   let logOutUser = () => {
-
+    localStorage.clear()
+    props.history.push("/")
   }
 
 
@@ -25,7 +26,7 @@ function HeaderContainer(props){
               <Link to="/profile" >
                 <Button className="profile-btn">Profile</Button>
               </Link>
-              <Button className="logout-btn">Logout</Button>
+              <Button onClick={logOutUser} className="logout-btn">Logout</Button>
               <Link to="/" >
               <Button className="home-btn">Home</Button>
               </Link>
