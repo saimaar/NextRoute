@@ -142,6 +142,17 @@ console.log(user);
   //
     return (
       <div className="page-window">
+        <HeaderContainer />
+       <hr className="header-separation"/>
+
+     <Switch>
+       <Route exact path='/' render={ () => <HomeContainer
+
+       destinations={destinations}
+       user={user}
+       />} />
+
+     </Switch>
 
       </div>
     )

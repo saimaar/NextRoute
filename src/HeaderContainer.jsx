@@ -4,14 +4,13 @@ import { Header, Button, Image, Modal } from 'semantic-ui-react'
 import SignUp from './HomeComponents/SignUp'
 import Login from './HomeComponents/Login'
 
-class HeaderContainer extends Component {
+function HeaderContainer(){
 
-  logOutUser = () => {
-    localStorage.clear()
-    this.props.historyProps.history.push("/")
+  let logOutUser = () => {
+
   }
 
-  render() {
+
     return (
       <div className="page-header">
         <Link to="/">
@@ -26,17 +25,17 @@ class HeaderContainer extends Component {
               <Link to="/profile" >
                 <Button className="profile-btn">Profile</Button>
               </Link>
-              <Button className="logout-btn" onClick={this.logOutUser}>Logout</Button>
+              <Button className="logout-btn">Logout</Button>
               <Link to="/" >
               <Button className="home-btn">Home</Button>
               </Link>
             </> :
             <>
             <Modal trigger={<Button className="sign-up-btn">Log in</Button>}>
-              <Login error={this.props.error} loginUser={this.props.loginUser} history={this.props.historyProps.history}/>
+              <Login />
             </Modal>
             <Modal trigger={<Button className="sign-up-btn">Sign up</Button>}>
-            <SignUp createNewUser={this.props.createNewUser} history={this.props.historyProps.history}/>
+            <SignUp />
           </Modal>
           <Link to="/" >
           <Button className="home-btn">Home</Button>
@@ -46,7 +45,6 @@ class HeaderContainer extends Component {
         </Header>
       </div>
     );
-  }
 
 }
 
