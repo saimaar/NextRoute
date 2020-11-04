@@ -7,13 +7,9 @@ function DestinationContainer(props) {
 
 let handleClick = () => {
   props.clearSearch("")
-  
-}
-console.log(props);
-  //
-  //   console.log(this.props);
 
-  //
+}
+// console.log(props);
   let destinationCard = props.destinations !== undefined ?
     props.destinations.map(destination =>
      <Link onClick={handleClick} key={destination.id} to={`/${destination.id}`}>

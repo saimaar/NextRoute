@@ -3,7 +3,7 @@ import { Icon, Label } from 'semantic-ui-react'
 
 
 function AuthContainer (props) {
-console.log(props.user);
+// console.log(props.user);
     return (
       <div>
         {localStorage.token ?

@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react'
 import { Form, Button, Modal } from 'semantic-ui-react'
 
-function Login (props) {
+function Login(props){
 
   let [username, setUsername] = useState("")
   let [password, setPassword] = useState("")

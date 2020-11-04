@@ -125,6 +125,7 @@ function App () {
           routerProps={routerProps}/> }/>
 
      </Switch>
+           <Footer />
 
       </div>
     )

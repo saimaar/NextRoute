@@ -7,9 +7,6 @@ function SearchForm(props){
   let handleSearch = (evt) => {
     props.updateSearchForm(evt.target.value)
   }
-
-
-
     return (
       <div>
           <Form className="search-form">
