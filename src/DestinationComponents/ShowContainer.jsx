@@ -19,14 +19,16 @@ function ShowContainer(props) {
    .then(r => r.json())
    .then(destination => {
      setDestination(destination)
+     setReviews(destination.reviews)
+    
    })
 
  },[])
 
 
 let createComment = (newComment) => {
-
-    fetch('https://traveladvisor-api.herokuapp.com/reviews', {
+console.log(newComment);
+    fetch('http://localhost:3000/reviews', {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -42,12 +44,14 @@ let createComment = (newComment) => {
     .then(r => r.json())
     .then((newReview) => {
       let reviewArr = [...reviews, newReview]
+       console.log("arr", reviewArr);
       setReviews(reviewArr)
     })
   }
+  // console.log("revies",reviews);
 
   let deleteReview = (review_id) => {
-    fetch(`https://traveladvisor-api.herokuapp.com/reviews/${review_id}`, {
+    fetch(`http://localhost:3000/reviews/${review_id}`, {
       method: "DELETE"
     })
     .then(r => r.json())
@@ -75,17 +79,15 @@ let createComment = (newComment) => {
       })
       .then(r => r.json())
       .then(add_joiner => {
-        console.log(add_joiner);
-        //   let newAddJoiner = [...destination.add_joiners, add_joiner]
-        //
-        //
+        // console.log(add_joiner);
         setAddJoiner(add_joiner)
         setClicked((prevState) => !prevState)
       })
   }
 
-console.log(addJoiner);
-console.log(destination);
+// console.log(addJoiner);
+// console.log(destination);
+console.log(reviews);
 
     let { things_to_dos } = destination
     let thingsToDo = !things_to_dos ? null : things_to_dos.map(thingstodo => <ThingsToDoContainer key={thingstodo.id} thingstodo={thingstodo}/>)
@@ -104,7 +106,12 @@ console.log(destination);
         <PhotoContainer destination={destination} clicked={clicked}/>
             <Header className="things-to-do-container-header">Things to Do</Header>
             <Card.Group className="things-to-do-container">{thingsToDo}</Card.Group>
-            <CommentContainer routerProps={props.routerProps} deleteReview={deleteReview} createComment={createComment} destination={destination} user={props.user} />
+            <CommentContainer
+              routerProps={props.routerProps}
+              deleteReview={deleteReview}
+              createComment={createComment}
+              reviews={reviews}
+              user={props.user} />
           </div>
           :
           <div><NotFound/></div>

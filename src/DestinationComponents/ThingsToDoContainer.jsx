@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Card, Image } from 'semantic-ui-react'
 
-class ThingsToDoContainer extends Component {
+function ThingsToDoContainer(props) {
 
-  render() {
-
-    let {name, bio, photo, destination} = this.props.thingstodo
+    let {name, bio, photo, destination} = props.thingstodo
 
     return (
         <Card className="things-to-do-card">
@@ -15,7 +13,5 @@ class ThingsToDoContainer extends Component {
         </Card>
     );
   }
-
-}
 
 export default ThingsToDoContainer;

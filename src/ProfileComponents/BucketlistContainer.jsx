@@ -4,16 +4,16 @@ import BucketlistCard from './BucketlistCard'
 import {Link} from 'react-router-dom'
 import { Container, Header, Card } from 'semantic-ui-react'
 
-class BucketlistContainer extends Component {
+function BucketlistContainer(props) {
 
 
-  render() {
-    let bucketlistDestination = !this.props.bucketlist ? null :
-     this.props.bucketlist.map(bucketlistItem =>
+
+    let bucketlistDestination = !props.bucketlist ? null :
+     props.bucketlist.map(bucketlistItem =>
           <BucketlistCard  key={bucketlistItem.id}
           bucketlistItem={bucketlistItem}
-          routerProps={this.props.routerProps}
-          deleteBucketItem={this.props.deleteBucketItem}/>)
+          routerProps={props.routerProps}
+          deleteBucketItem={props.deleteBucketItem}/>)
 
     return (
       <Container className="bucketlist-container">
@@ -25,6 +25,6 @@ class BucketlistContainer extends Component {
     );
   }
 
-}
+
 
 export default BucketlistContainer;

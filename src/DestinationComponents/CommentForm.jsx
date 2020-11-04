@@ -26,6 +26,7 @@ handleRate=(evt)=>{
 
   handleSubmit=(evt)=>{
     evt.preventDefault()
+    console.log("hello");
     this.props.createComment(this.state)
     this.setState({
       comment: "",

@@ -6,7 +6,14 @@ import { Header, Container } from 'semantic-ui-react'
 class CommentContainer extends Component {
 
   render() {
-    let commentCard = this.props.destination.reviews ?  this.props.destination.reviews.map(review => <CommentCard key={review.id} review={review} user={this.props.user} deleteReview={this.props.deleteReview} routerProps={this.props.routerProps} /> ) : null
+    console.log(this.props.reviews);
+    let commentCard = this.props.reviews ?
+     this.props.reviews.map(review =>
+       <CommentCard key={review.id}
+         review={review}
+         user={this.props.user}
+         deleteReview={this.props.deleteReview}
+         routerProps={this.props.routerProps} /> ) : null
 
       return (
           <Container className="comment-container">
