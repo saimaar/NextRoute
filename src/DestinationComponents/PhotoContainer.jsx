@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Image, Header } from 'semantic-ui-react'
 
-class PhotoContainer extends Component {
+function PhotoContainer(props){
 
-  render() {
-
-    let {name, bio, photo, trip_type} = this.props.destination
+    let {name, bio, photo, trip_type} = props.destination
 
     return (
         <div className="destination-show-container">
@@ -16,8 +14,6 @@ class PhotoContainer extends Component {
         </div>
 
     );
-  }
-
 }
 
 export default PhotoContainer;

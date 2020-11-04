@@ -3,26 +3,24 @@ import CommentCard from './CommentCard'
 import CommentForm from './CommentForm'
 import { Header, Container } from 'semantic-ui-react'
 
-class CommentContainer extends Component {
+function CommentContainer (props){
 
-  render() {
-    console.log(this.props.reviews);
-    let commentCard = this.props.reviews ?
-     this.props.reviews.map(review =>
+    let commentCard = props.reviews ?
+      props.reviews.map(review =>
        <CommentCard key={review.id}
          review={review}
-         user={this.props.user}
-         deleteReview={this.props.deleteReview}
-         routerProps={this.props.routerProps} /> ) : null
+         user={props.user}
+         deleteReview={props.deleteReview}
+         routerProps={props.routerProps} /> ) : null
 
       return (
           <Container className="comment-container">
-              <Header className="review-container-header">Reviews for this destination:</Header>
+              <Header className="review-container-header">Share your Reviews</Header>
               {commentCard}
-            <CommentForm createComment={this.props.createComment} />
+            <CommentForm createComment={props.createComment} />
           </Container>
       );
     }
-  }
+
 
 export default CommentContainer;

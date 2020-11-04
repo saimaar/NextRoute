@@ -20,14 +20,14 @@ function ShowContainer(props) {
    .then(destination => {
      setDestination(destination)
      setReviews(destination.reviews)
-    
+
    })
 
  },[])
 
 
-let createComment = (newComment) => {
-console.log(newComment);
+let createComment = (comment, rating) => {
+
     fetch('http://localhost:3000/reviews', {
       method: "POST",
       headers: {
@@ -37,8 +37,8 @@ console.log(newComment);
       },
       body: JSON.stringify({
         destination_id: destination.id,
-        comment: newComment.comment,
-        rating: newComment.rating
+        comment: comment,
+        rating: rating
       })
     })
     .then(r => r.json())

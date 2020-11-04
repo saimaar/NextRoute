@@ -1,58 +1,49 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import { Form, Button, Rating } from 'semantic-ui-react'
 
-class CommentForm extends Component {
+function CommentForm(props){
 
-  state={
-    comment: "",
-    rating: 0
+  let [comment, setComment] = useState("")
+  let [rating, setRating] = useState(0)
+
+  let handleChange = (event) => {
+    setComment(event.target.value)
   }
 
-  handleChange = (event) => {
-    let {name, value} = event.target
-    this.setState({
-        [name]: value,
-    })
-}
-
-handleRate=(evt)=>{
+let handleRate=(evt)=>{
   let rating = parseInt(evt.target.getAttribute("aria-posinset"))
-  this.setState({
-    rating
-  })
+    setRating(rating)
 }
 
 
-  handleSubmit=(evt)=>{
+  let handleSubmit=(evt)=>{
     evt.preventDefault()
-    console.log("hello");
-    this.props.createComment(this.state)
-    this.setState({
-      comment: "",
-      rating: 0
-    })
+
+    props.createComment(comment, rating)
+    setRating(0)
+    setComment("")
   }
 
 
-  render() {
+
     return (
-      <Form onSubmit={this.handleSubmit} hidden={localStorage.token ? false : true}>
+      <Form onSubmit={handleSubmit} hidden={localStorage.token ? false : true}>
         <TextareaAutosize
           className="comment-form-input"
           label='Leave a review here:'
           placeholder="Write your thoughts"
           name="comment"
-          value={this.state.comment}
-          onChange={this.handleChange}
+          value={comment}
+          onChange={handleChange}
         />
         <Rating
           className="comment-form-rating"
           icon="star"
           name="rating"
-          onRate={this.handleRate}
+          onRate={handleRate}
           maxRating={5}
-          rating={this.state.rating}
+          rating={rating}
         />
         <br/>
         <Button className="create-review-button" type='submit'>Submit</Button>
@@ -60,6 +51,5 @@ handleRate=(evt)=>{
     );
   }
 
-}
 
 export default CommentForm;
