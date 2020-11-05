@@ -3,6 +3,7 @@ import AuthContainer from './AuthContainer'
 import DestinationContainer from './DestinationContainer'
 import SearchForm from './SearchForm'
 import { Image } from 'semantic-ui-react'
+import MapContainer from '../MapContainer'
 
 function HomeContainer(props) {
 
@@ -13,6 +14,7 @@ function HomeContainer(props) {
           searchTerm={props.searchTerm}
           updateSearchForm={props.updateSearchForm}
         />
+      <MapContainer/>
       <AuthContainer user={props.user}  />
         <div className="auth-destination-container">
           <DestinationContainer clearSearch={props.clearSearch}  destinations={props.destinations} />

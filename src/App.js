@@ -9,6 +9,7 @@ import HeaderContainer from './HeaderContainer.jsx'
 import Footer from './Footer'
 import NotFound from './NotFound';
 
+
 function App () {
 
     let [destinations, setDestinations] = useState([])
