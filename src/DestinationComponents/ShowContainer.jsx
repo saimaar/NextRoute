@@ -5,9 +5,10 @@ import ThingsToDoContainer from './ThingsToDoContainer'
 import NotFound from '../NotFound'
 import { Card, Header } from 'semantic-ui-react'
 import { Divider, Form, Label } from 'semantic-ui-react'
+import MapContainer from '../MapContainer'
 
 function ShowContainer(props) {
-
+ // debugger
  let [clicked, setClicked] = useState(false)
  let [destination, setDestination] = useState({})
  let [addJoiner, setAddJoiner] = useState([])
@@ -21,9 +22,9 @@ function ShowContainer(props) {
      setDestination(destination)
      setReviews(destination.reviews)
 
-   })
+   },[])
 
- },[])
+ },[parseInt(props.routerProps.match.params.id)])
 
 
 let createComment = (comment, rating) => {
@@ -64,7 +65,7 @@ let createComment = (comment, rating) => {
 
 
   let addToBucketList = (notifyAdd) => {
-    console.log(localStorage.token);
+    // console.log(localStorage.token);
       fetch(`http://localhost:3000/add_joiners`, {
         method: "POST",
 
@@ -86,23 +87,25 @@ let createComment = (comment, rating) => {
   }
 
 // console.log(addJoiner);
-// console.log(destination);
-console.log(reviews);
+ // console.log(destination);
+ // console.log(props.destinationsId);
 
-    let { things_to_dos } = destination
+
+    let { things_to_dos, geocode} = destination
     let thingsToDo = !things_to_dos ? null : things_to_dos.map(thingstodo => <ThingsToDoContainer key={thingstodo.id} thingstodo={thingstodo}/>)
     let notifyAdd =  clicked ? <Label pointing ="right" className="notifyAdd" size ="teal" basic color='black' >
           Added to your bucketlist!
         </Label> : null
-
+// debugger
     return (
       <div>
-        {props.destinationsId.includes(parseInt(props.routerProps.match.params.id)) ?
+        {parseInt(props.routerProps.match.params.id) ?
           <div>
             <div className="buckNotify">
           {notifyAdd}
           <div onClick={addToBucketList} className="add-to-bucketlist" hidden={localStorage.token ? false : true}>+ Add to bucketlist </div>
             </div>
+            <MapContainer/>
         <PhotoContainer destination={destination} clicked={clicked}/>
             <Header className="things-to-do-container-header">Things to Do</Header>
             <Card.Group className="things-to-do-container">{thingsToDo}</Card.Group>

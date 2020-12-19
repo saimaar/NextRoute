@@ -98,7 +98,6 @@ function App () {
   }
 
     let destinationsId = destinations.map(destination => destination.id)
-
     return (
       <div className="page-window">
         <HeaderContainer error={error} createNewUser={createNewUser} loginUser={loginUser} history={history}/>

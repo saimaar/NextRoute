@@ -630,3 +630,8 @@ font-family: 'Pacifico', cursive; */
     position: absolute !important;
     bottom: 0.5vw;
 }
+
+.wrapper {
+  position: relative ;
+  padding-top: 3%;
+}

@@ -3,10 +3,10 @@ import { Map, GoogleApiWrapper, Marker} from 'google-maps-react';
 
 const mapStyles = {
     position: 'absolute',
-    "margin-top": '1%',
-    "margin-left": '1%',
-    width: '97%',
-    height: "85vh",
+    "margin-top": '3vh',
+    "margin-left": '3vh%',
+    width: '30%',
+    height: "60vh",
     border: 'solid 2px gray',
     "border-radius": "20px"
 };
@@ -16,8 +16,6 @@ class MapContainer extends PureComponent {
 
   render() {
     return (
-      <div>
-
         <div className="wrapper">
           <Map
             google={this.props.google}
@@ -29,7 +27,6 @@ class MapContainer extends PureComponent {
 
            </div>
 
-      </div>
     );
   }
 
