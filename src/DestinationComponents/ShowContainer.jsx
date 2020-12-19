@@ -24,7 +24,7 @@ function ShowContainer(props) {
 
    },[])
 
- },[parseInt(props.routerProps.match.params.id)])
+ },[props.routerProps.match.params.id])
 
 
 let createComment = (comment, rating) => {
@@ -90,13 +90,12 @@ let createComment = (comment, rating) => {
  // console.log(destination);
  // console.log(props.destinationsId);
 
-
-    let { things_to_dos, geocode} = destination
+    let { things_to_dos} = destination
     let thingsToDo = !things_to_dos ? null : things_to_dos.map(thingstodo => <ThingsToDoContainer key={thingstodo.id} thingstodo={thingstodo}/>)
     let notifyAdd =  clicked ? <Label pointing ="right" className="notifyAdd" size ="teal" basic color='black' >
           Added to your bucketlist!
         </Label> : null
-// debugger
+
     return (
       <div>
         {parseInt(props.routerProps.match.params.id) ?
@@ -105,7 +104,7 @@ let createComment = (comment, rating) => {
           {notifyAdd}
           <div onClick={addToBucketList} className="add-to-bucketlist" hidden={localStorage.token ? false : true}>+ Add to bucketlist </div>
             </div>
-            <MapContainer/>
+            <MapContainer getGeocode={destination.get_geocode} destination={destination}/>
         <PhotoContainer destination={destination} clicked={clicked}/>
             <Header className="things-to-do-container-header">Things to Do</Header>
             <Card.Group className="things-to-do-container">{thingsToDo}</Card.Group>

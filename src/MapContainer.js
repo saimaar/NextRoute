@@ -13,16 +13,34 @@ const mapStyles = {
 
 class MapContainer extends PureComponent {
 
+  displayMarkers = () => {
+
+        let {destination, getGeocode} = this.props
+        let lat = getGeocode !== undefined ? Number(getGeocode[0]) : null
+        let lon = getGeocode !== undefined ? Number(getGeocode[1]) : null
+        // console.log(lat);
+        return <Marker key={destination.id} id={destination.id} position={{
+            lat: lat,
+            lng: lon
+        }}
+        onClick={() => console.log(`${destination.name}`)} />
+    }
 
   render() {
+    let {destination, getGeocode} = this.props
+    let lat = getGeocode !== undefined ? Number(getGeocode[0]) : null
+    let lon = getGeocode !== undefined ? Number(getGeocode[1]) : null
+    let center = { lat: lat, lng: lon}
+
     return (
         <div className="wrapper">
           <Map
             google={this.props.google}
              className="map"
-              zoom={13}
+             zoom={6}
               style={mapStyles}
-              initialCenter={{ lat: 40.7229, lng: -73.99992}}>
+              center={center}>
+              {this.displayMarkers()}
                </Map>
 
            </div>
