@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import AuthContainer from './AuthContainer'
 import DestinationContainer from './DestinationContainer'
 import SearchForm from './SearchForm'
@@ -10,7 +10,6 @@ function HomeContainer(props) {
     return (
       <div>
         <Image className="home-page-picture" src="https://www.katikiesmykonos.com/wp-content/uploads/2019/09/drz_katikies-mykonos_q1a0346.jpg" alt="home page picture of a beach"/>
-
         <SearchForm
           searchTerm={props.searchTerm}
           updateSearchForm={props.updateSearchForm}
