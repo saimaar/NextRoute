@@ -11,9 +11,9 @@ function HeaderContainer(props) {
   };
 
   return (
-    <div class="StreamsHero-image">
-      <div class="StreamsHero-content">
-        <div class="StreamsHero-buttonContainer">
+    <div className="StreamsHero-image">
+      <div className="StreamsHero-content">
+        <div className="StreamsHero-buttonContainer">
           <Link to="/">
             <div className="logo-title-header">
               <Image
@@ -80,8 +80,8 @@ function HeaderContainer(props) {
             </>
           )}
         </div>
-        <h2 class="StreamsHero-header">Search your next route here...</h2>
-        <p class="StreamsHero-blurb">Search, Book, Travel and Repeat!</p>
+        <h2 className="StreamsHero-header">Search your next route here...</h2>
+        <p className="StreamsHero-blurb">Search, Book, Travel and Repeat!</p>
       </div>
     </div>
   );
