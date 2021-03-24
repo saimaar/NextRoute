@@ -8,6 +8,7 @@ import ShowContainer from "./DestinationComponents/ShowContainer";
 import HeaderContainer from "./HeaderContainer.jsx";
 import Footer from "./Footer";
 import NotFound from "./NotFound";
+import {Container} from 'semantic-ui-react'
 
 function App() {
   let [destinations, setDestinations] = useState([]);
@@ -95,14 +96,13 @@ function App() {
 
   let destinationsId = destinations.map((destination) => destination.id);
   return (
-    <div className="page-window">
+    <Container>
       <HeaderContainer
         error={error}
         createNewUser={createNewUser}
         loginUser={loginUser}
         history={history}
       />
-      <hr className="header-separation" />
       <Switch>
         <Route
           exact
@@ -121,8 +121,7 @@ function App() {
           exact
           path="/profile"
           render={
-            localStorage.token
-              ? (routerProps) => (
+            localStorage.token ? (routerProps) => (
                   <ProfileContainer
                     history={history}
                     routerProps={routerProps}
@@ -144,7 +143,7 @@ function App() {
         />
       </Switch>
       <Footer />
-    </div>
+    </Container>
   );
 }
 

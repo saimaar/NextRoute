@@ -4,7 +4,7 @@ import PhotoContainer from "./PhotoContainer";
 import ThingsToDoContainer from "./ThingsToDoContainer";
 import NotFound from "../NotFound";
 import { Card, Header } from "semantic-ui-react";
-import { Divider, Label, Grid, Segment } from "semantic-ui-react";
+import { Divider, Label, Grid, Segment, Container } from "semantic-ui-react";
 
 import MapContainer from "../MapContainer";
 
@@ -83,11 +83,11 @@ function ShowContainer(props) {
   };
 
   let { things_to_dos } = destination;
-  let thingsToDo = !things_to_dos
-    ? null
-    : things_to_dos.map((thingstodo) => (
+
+  let thingsToDo = !things_to_dos ? null : things_to_dos.map((thingstodo) => (
         <ThingsToDoContainer key={thingstodo.id} thingstodo={thingstodo} />
       ));
+      
   let notifyAdd = clicked ? (
     <Label
       pointing="right"
@@ -101,9 +101,9 @@ function ShowContainer(props) {
   ) : null;
 
   return (
-    <div>
+    <Container>
       {parseInt(props.routerProps.match.params.id) ? (
-        <div>
+        <Container>
           <div className="buckNotify">
             {notifyAdd}
             <div
@@ -133,7 +133,7 @@ function ShowContainer(props) {
           <Header className="things-to-do-container-header">
             Things to Do
           </Header>
-          <Card.Group className="things-to-do-container">
+          <Card.Group itemsPerRow={4}>
             {thingsToDo}
           </Card.Group>
           <CommentContainer
@@ -143,13 +143,13 @@ function ShowContainer(props) {
             reviews={reviews}
             user={props.user}
           />
-        </div>
+        </Container>
       ) : (
-        <div>
+        <Container>
           <NotFound />
-        </div>
+        </Container>
       )}
-    </div>
+    </Container>
   );
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Header, Button, Image, Modal } from "semantic-ui-react";
+import { Container, Header, Button, Image, Modal } from "semantic-ui-react";
 import SignUp from "./HomeComponents/SignUp";
 import Login from "./HomeComponents/Login";
 
@@ -11,6 +11,7 @@ function HeaderContainer(props) {
   };
 
   return (
+    <Container>
     <div className="StreamsHero-image">
       <div className="StreamsHero-content">
         <div className="StreamsHero-buttonContainer">
@@ -84,6 +85,7 @@ function HeaderContainer(props) {
         <p className="StreamsHero-blurb">Search, Book, Travel and Repeat!</p>
       </div>
     </div>
+    </Container>
   );
 }
 
